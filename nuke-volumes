@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+volumes=$(sudo zfs list -H -o name | grep tf/vol-)
+for volume in $volumes; do
+  sudo zfs destroy -r $volume
+done

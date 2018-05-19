@@ -1,0 +1,23 @@
+<?xml version='1.0'?>
+<!DOCTYPE service_bundle SYSTEM "/usr/share/lib/xml/dtd/service_bundle.dtd.1">
+<service_bundle type='manifest' name='laksa'>
+  <service name='site/laksa' type='service' version='1'>
+    <create_default_instance enabled='true' />
+    <single_instance />
+    <dependency name='everything' grouping='require_all' restart_on='refresh' type='service'>
+      <service_fmri value='svc:/milestone/network' />
+    </dependency>
+    <exec_method type='method' name='start' exec='/opt/python34/bin/python3 laksa.py' timeout_seconds='10'>
+		<method_context working_directory='/opt/20ft/laksa/'>
+          <method_environment>
+            <envvar name='LD_LIBRARY_PATH' value='/opt/20ft/lib'/>
+          </method_environment>
+        </method_context>
+    </exec_method>
+    <exec_method type='method' name='stop' exec=':kill' timeout_seconds='60'>
+    </exec_method>
+    <property_group name='startd' type='framework'>
+      <propval name='duration' type='astring' value='child'/>
+    </property_group>
+  </service>
+</service_bundle>

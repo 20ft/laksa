@@ -1,0 +1,2 @@
+#!/bin/bash
+python3 /opt/20ft/laksa/pricelist.py

@@ -1,0 +1,15 @@
+[Unit]
+Description=Mail Redirector Proxy
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/socat TCP4-LISTEN:25,reuseaddr,fork TCP4:mail.20ft.nz:25
+KillSignal=SIGINT
+TimeoutStopSec=5
+Restart=always
+RestartSec=5
+User=root
+Group=root
+
+[Install]
+WantedBy=multi-user.target

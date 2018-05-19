@@ -1,0 +1,16 @@
+[Unit]
+Description=User invite server for 20ft
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/20ft/laksa
+ExecStart=/usr/bin/python3 invite-user-server.py
+Environment=PYTHONUNBUFFERED=1
+KillSignal=SIGINT
+TimeoutStopSec=10
+Restart=always
+User=root
+Group=root
+
+[Install]
+WantedBy=multi-user.target

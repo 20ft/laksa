@@ -1,0 +1,4 @@
+#!/bin/bash
+cd /opt/20ft/laksa
+export PYTHONPATH="."
+sudo python3 spawn-node.py
