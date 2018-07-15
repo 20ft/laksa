@@ -1,7 +1,15 @@
-# (c) David Preece 2016-2017
-# davep@polymath.tech : https://polymath.tech/ : https://github.com/rantydave
-# This work licensed under the Non-profit Open Software Licence version 3 (https://opensource.org/licenses/NPOSL-3.0)
-# For commercial licensing see https://20ft.nz/
+# Copyright (c) 2016-2018 David Preece - davep@polymath.tech, All rights reserved.
+#
+# Permission to use, copy, modify, and/or distribute this software for any
+# purpose with or without fee is hereby granted.
+#
+# THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+# WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+# MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+# ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+# WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+# ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+# OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 from subprocess import call, check_output, DEVNULL, CalledProcessError
 from base64 import b64encode, b64decode
@@ -71,9 +79,9 @@ class Volume(Taggable):
             uuid = volume[7:].encode()
             user_bin = b64decode(user[:-1] + "=")  # -1 is the /n
             vol = Volume(user_bin, uuid, tag)
+            logging.info("Found volume: %s" % vol.global_display_name())
             rtn.add(vol)
             call(['zfs', 'set', Volume.share_options, volume])  # linux nfs doesn't initialise sharing from zfs metadata
-            logging.info("Found volume: %s" % vol.global_display_name())
 
         return rtn
 
